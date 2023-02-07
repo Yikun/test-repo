@@ -1,0 +1,23 @@
+name: Validate
+
+on:
+  pull_request:
+
+env:
+  SKIP_CI_SPECS: |
+    components/fs/lustre-client/SPECS/lustre.spec
+jobs:
+
+  build_on_openEuler:
+    strategy:
+      matrix:
+        repo: [repo.openeuler.org, repo.huaweicloud.com, mirror.truenetwork.ru, mirror.dfw.rax.opendev.org]
+    runs-on: ubuntu-latest
+    name: ${{ matrix.repo }}
+    container:
+      image: docker.io/openeuler/openeuler:22.03-lts
+    steps:
+    - name: Install git
+      run: |
+        sudo sed -i "s@repo.openeuler.org@${{ matrix.repo }}@g" /etc/yum.repos.d/openEuler.repo
+        dnf -y install git
