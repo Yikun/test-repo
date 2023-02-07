@@ -11,7 +11,7 @@ jobs:
   build_on_openEuler:
     strategy:
       matrix:
-        repo: [repo.openeuler.org, repo.huaweicloud.com, mirror.truenetwork.ru, mirror.dfw.rax.opendev.org]
+        repo: [repo.openeuler.org, repo.huaweicloud.com/openeuler, mirror.truenetwork.ru/openeuler, mirror.dfw.rax.opendev.org/openeuler]
     runs-on: ubuntu-latest
     name: ${{ matrix.repo }}
     container:
